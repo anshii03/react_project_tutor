@@ -1,6 +1,7 @@
 import RestaurantCard from "./RestaurantCard";
 import { restaurants_data } from "../common/mock_data";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 // event handlers ------ onclick
 
@@ -40,10 +41,9 @@ const Body = () => {
       <div className="res-container">
         {filteredRestaurants.map((restaurant) => {
           return (
-            <RestaurantCard
-              key={restaurant.id}
-              restaurant_details={restaurant}
-            />
+          <Link to={`/restaurant/${restaurant.id}`} key={restaurant.id}>
+            <RestaurantCard key={restaurant.id} restaurant_details={restaurant} />
+          </Link> 
           );
         })}
       </div>
