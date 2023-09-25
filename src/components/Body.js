@@ -1,6 +1,6 @@
 import RestaurantCard from "./RestaurantCard";
 import { restaurants_data } from "../common/mock_data";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 // event handlers ------ onclick
@@ -16,6 +16,16 @@ const Body = () => {
   function handleOnChangeEvent(e) {
     setSearchText(e.target.value);
   }
+
+  console.log("xyz.......");
+
+  useEffect(() => {
+
+    // make any api calls
+      console.log("Learning useEffect hook");
+  }, []);
+
+  // if dependency array is empty , then useEffect hook is called only once
 
   function filterRestaurants() {
     const filterData = restaurants_data.filter((restaurant) => {
