@@ -34,3 +34,8 @@ function App() {
 }
 
 export default App;
+
+// custom hooks ---- any hooks which we can create
+// Modular ---- Single Responsibility Principle
+
+// functions 

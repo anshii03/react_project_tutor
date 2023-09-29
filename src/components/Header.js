@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
+import useOnline from "../common/useOnline";
 
 const Header = () => {
+
+  const isOnline = useOnline();
+
   return (
     <nav className="header">
       <img
@@ -9,6 +13,7 @@ const Header = () => {
         alt="food-logo"
       ></img>
       <ul>
+        <li>Online Status: {isOnline ? "✅" : "🔴"}</li>
         <li>
           <Link to="/">Home</Link>
         </li>

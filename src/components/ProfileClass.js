@@ -12,13 +12,11 @@ class ProfileClass extends React.Component{
         count1 : 1
        }
 
-       console.log("constructor");
-
-
+       console.log("Child constructor");
     }
 
     componentDidMount() {
-        console.log("component mounted");
+        console.log("child component mounted");
 
         this.timer = setInterval(() => {
             console.log("interval created");
@@ -26,18 +24,18 @@ class ProfileClass extends React.Component{
     }
 
     componentDidUpdate() {
-        console.log("componeny updated");
+        console.log("child componeny updated");
     }
 
     componentWillUnmount() {
-        console.log("class componnet unmounted");
+        console.log("child class componnet unmounted");
         clearInterval(this.timer);
     }
 
 
     render() {
 
-        console.log("render function");
+        console.log("child render function");
        const { name, color} = this.props;
        const { count, count1} = this.state;
             return(

@@ -90,6 +90,13 @@ nav > ul> li > a {
   border: 1px solid transparent;
 }
 
+.shimmer-card {
+  width: 300px;
+  height: 400px;
+  background-color: lightgray;
+  margin: 10px;
+}
+
 .restaurant-card:hover {
   border: 1px solid black;
   cursor: pointer;
