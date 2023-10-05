@@ -3,7 +3,6 @@ import { restaurants_data } from "../common/mock_data";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Shimmer from "./Shimmer";
-import useRestaurant from "../common/useRestaurants";
 import useOnline from "../common/useOnline";
 import TopRatedRestaurants from "./TopRatedRestaurants";
 
@@ -84,7 +83,11 @@ const Body = () => {
     <>
       <div className="top-filter-bar">
         <div className="search-bar">
-          <input type="text" onChange={handleOnChangeEvent}></input>
+          <input
+            type="text"
+            className="border border-solid border-black"
+            onChange={handleOnChangeEvent}
+          ></input>
           <button onClick={filterRestaurants}>Search</button>
         </div>
 
@@ -100,9 +103,12 @@ const Body = () => {
         <div className="res-container">
           {filteredRestaurants.map((restaurant) => {
             return (
-              <Link to={`/restaurant/${restaurant.id}`} key={restaurant.id}>
+              <Link
+                to={`/restaurant/${restaurant.info.id}`}
+                key={restaurant.info.id}
+              >
                 <RestaurantCard
-                  key={restaurant.id}
+                  key={restaurant.info.id}
                   restaurant_details={restaurant}
                 />
               </Link>

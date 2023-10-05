@@ -8,7 +8,12 @@ const TopRatedRestaurants = (props) => {
   }
 
   return (
-    <button onClick={filterTopRatedRestaurants}>TopRatedRestaurants</button>
+    <button
+      className="bg-gray-200 px-2 py-2 rounded-lg "
+      onClick={filterTopRatedRestaurants}
+    >
+      TopRatedRestaurants
+    </button>
   );
 };
 

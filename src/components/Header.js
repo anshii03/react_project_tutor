@@ -5,9 +5,9 @@ const Header = () => {
   const isOnline = useOnline();
 
   return (
-    <nav className="header">
+    <nav className="flex justify-around border border-solid border-black m-2">
       <img
-        className="food-logo"
+        className="w-28 h-28"
         src="https://img.freepik.com/premium-vector/good-food-logo-template_79169-17.jpg?w=2000"
         alt="food-logo"
       ></img>
@@ -24,6 +24,9 @@ const Header = () => {
         </li>
         <li>
           <Link to="/groceries">Groceries</Link>
+        </li>
+        <li>
+          <Link to="/cart">Cart</Link>
         </li>
       </ul>
     </nav>
