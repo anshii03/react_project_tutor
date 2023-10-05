@@ -1,15 +1,25 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import About from "./components/About";
 import Error from "./components/Error";
 import Contact from "./components/Contact";
 import Body from "./components/Body";
 import Profile from "./components/Profile";
 import RestaurantDetails from "./components/RestaurantDetails";
+
+/**
+ * Lazy Loading
+ * Code Splitting
+ * Chunking
+ * On Demand Loading
+ * Dynamic Import
+ */
+
+const Groceries = lazy(() => import("./components/Groceries"));
+const About = lazy(() => import("./components/About"));
 
 const appRouter = createBrowserRouter([
   {
@@ -38,6 +48,14 @@ const appRouter = createBrowserRouter([
       {
         path: "/restaurant/:resId", // dynamic routing
         element: <RestaurantDetails />,
+      },
+      {
+        path: "/groceries",
+        element: (
+          <Suspense fallback={<h1>Loading</h1>}>
+            <Groceries />
+          </Suspense>
+        ),
       },
     ],
   },

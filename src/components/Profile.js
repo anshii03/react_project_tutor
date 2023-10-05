@@ -1,10 +1,9 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 
 const Profile = (props) => {
-
   // count
 
-  const [count , setCount] = useState(0); 
+  const [count, setCount] = useState(0);
   const [count1, setCount1] = useState(0);
 
   console.log("props", props);
@@ -12,7 +11,7 @@ const Profile = (props) => {
   console.log("rendering");
 
   // Object destructuring
-  const { name , color} = props;
+  const { name, color } = props;
 
   function updateCount() {
     setCount(1);
@@ -24,12 +23,12 @@ const Profile = (props) => {
 
     const timer = setInterval(() => {
       console.log("interval created functional comp");
-    }, 1000)
+    }, 1000);
 
-    return() => {
+    return () => {
       console.log("functional component is unmounted");
       clearInterval(timer);
-    }
+    };
   }, [count, count1]);
 
   return (

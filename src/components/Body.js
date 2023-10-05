@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Shimmer from "./Shimmer";
 import useRestaurant from "../common/useRestaurants";
 import useOnline from "../common/useOnline";
+import TopRatedRestaurants from "./TopRatedRestaurants";
 
 // event handlers ------ onclick
 
@@ -14,28 +15,27 @@ const Body = () => {
   // Array destructuring
   const [searchText, setSearchText] = useState("");
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-  const [ allRestaurants, setAllRestaurants] = useState([]);
-
- 
+  const [allRestaurants, setAllRestaurants] = useState([]);
 
   function handleOnChangeEvent(e) {
     setSearchText(e.target.value);
   }
 
-  // if dependency array is empty , then useEffect hook is called only once
+  // if de pendency array is empty , then useEffect hook is called only once
 
   useEffect(() => {
-
     // make any api calls
-      fetchData();
-      console.log("Learning useEffect hook");
+    fetchData();
   }, []);
 
-  
   const isOnline = useOnline();
 
   if (!isOnline) {
-    return <h1>Looks like you are offline !! Please check your Internet Connection</h1>
+    return (
+      <h1>
+        Looks like you are offline !! Please check your Internet Connection
+      </h1>
+    );
   }
 
   const fetchData = async () => {
@@ -48,15 +48,21 @@ const Body = () => {
     console.log("json", json);
 
     //Optional Chaining
-    setAllRestaurants(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setAllRestaurants(
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
 
-    setFilteredRestaurants(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setFilteredRestaurants(
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+    console.log("all", allRestaurants);
   };
-
 
   function filterRestaurants() {
     const filterData = allRestaurants.filter((restaurant) => {
-      return restaurant.info.name.toLowerCase().includes(searchText.toLowerCase());
+      return restaurant.info.name
+        .toLowerCase()
+        .includes(searchText.toLowerCase());
     });
 
     // searchText = "Pizza"
@@ -69,28 +75,41 @@ const Body = () => {
     console.log("filtered restaurants", filteredRestaurants);
   }
 
+  function filterTopRatedRestaurants(topRatedRestaurants) {
+    console.log("top rated restaurants", topRatedRestaurants);
+    setFilteredRestaurants(topRatedRestaurants);
+  }
+
   return (
     <>
-      <div className="search-bar">
-        <input type="text" onChange={handleOnChangeEvent}></input>
-        <button onClick={filterRestaurants}>Search</button>
+      <div className="top-filter-bar">
+        <div className="search-bar">
+          <input type="text" onChange={handleOnChangeEvent}></input>
+          <button onClick={filterRestaurants}>Search</button>
+        </div>
+
+        <TopRatedRestaurants
+          onFilter={filterTopRatedRestaurants}
+          restaurants={filteredRestaurants}
+        />
       </div>
 
-      {
-        filteredRestaurants.length == 0 ? <Shimmer /> :  (
-          <div className="res-container">
-            {filteredRestaurants.map((restaurant) => {
-              return (
+      {filteredRestaurants.length == 0 ? (
+        <Shimmer />
+      ) : (
+        <div className="res-container">
+          {filteredRestaurants.map((restaurant) => {
+            return (
               <Link to={`/restaurant/${restaurant.id}`} key={restaurant.id}>
-                <RestaurantCard key={restaurant.id} restaurant_details={restaurant} />
-              </Link> 
-              );
-            })}
-          </div>
-        )
-         
-      }
-     
+                <RestaurantCard
+                  key={restaurant.id}
+                  restaurant_details={restaurant}
+                />
+              </Link>
+            );
+          })}
+        </div>
+      )}
     </>
   );
 };

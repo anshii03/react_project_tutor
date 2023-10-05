@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import useOnline from "../common/useOnline";
 
 const Header = () => {
-
   const isOnline = useOnline();
 
   return (
@@ -22,6 +21,9 @@ const Header = () => {
         </li>
         <li>
           <Link to="/contact">Contact</Link>
+        </li>
+        <li>
+          <Link to="/groceries">Groceries</Link>
         </li>
       </ul>
     </nav>

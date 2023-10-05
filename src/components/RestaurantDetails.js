@@ -8,9 +8,7 @@ const RestaurantDetails = () => {
       <h1>Restaurant Details</h1>
       <span>Id: {resId}</span>
     </>
-
-  )
-
+  );
 };
 
 export default RestaurantDetails;

@@ -123,3 +123,8 @@ footer {
   margin: 10px;
   padding: 10px;
 }
+
+.top-filter-bar {
+  display: flex;
+  align-items: center;
+}
