@@ -1,10 +1,14 @@
 import { CDN_URL } from "../common/constants";
+import { useContext } from "react";
+import userContext from "../common/userContext";
 
 const RestaurantCard = (props) => {
   // Object destructuring
 
   const { name, cuisines, avgRating, costForTwo, cloudinaryImageId } =
     props.restaurant_details.info;
+
+  const { currentUser } = useContext(userContext);
 
   return (
     <div className="restaurant-card">
@@ -18,6 +22,7 @@ const RestaurantCard = (props) => {
           <h3>{avgRating}</h3>
           <span>{costForTwo}</span>
         </div>
+        <div>{currentUser}</div>
       </div>
     </div>
   );

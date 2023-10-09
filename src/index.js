@@ -9,6 +9,7 @@ import Contact from "./components/Contact";
 import Body from "./components/Body";
 import Profile from "./components/Profile";
 import RestaurantDetails from "./components/RestaurantDetails";
+import Cart from "./components/Cart";
 
 /**
  * Lazy Loading
@@ -56,6 +57,10 @@ const appRouter = createBrowserRouter([
             <Groceries />
           </Suspense>
         ),
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
   },

@@ -1,10 +1,11 @@
 import RestaurantCard from "./RestaurantCard";
 import { restaurants_data } from "../common/mock_data";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import Shimmer from "./Shimmer";
 import useOnline from "../common/useOnline";
 import TopRatedRestaurants from "./TopRatedRestaurants";
+import userContext from "../common/userContext";
 
 // event handlers ------ onclick
 
@@ -15,6 +16,7 @@ const Body = () => {
   const [searchText, setSearchText] = useState("");
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [allRestaurants, setAllRestaurants] = useState([]);
+  const { currentUser, setUserName } = useContext(userContext);
 
   function handleOnChangeEvent(e) {
     setSearchText(e.target.value);
@@ -95,6 +97,13 @@ const Body = () => {
           onFilter={filterTopRatedRestaurants}
           restaurants={filteredRestaurants}
         />
+
+        <input
+          className="border border-black"
+          onChange={(e) => {
+            setUserName(e.target.value);
+          }}
+        ></input>
       </div>
 
       {filteredRestaurants.length == 0 ? (
