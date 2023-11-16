@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import userContext from "../common/userContext";
 
 function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isSignUp, setIsSignUp] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(true);
   const [fullName, setFullName] = useState("");
+
+  const { currentUser, setUserName } = useContext(userContext);
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    isSignUp ? register() : login();
+    !isSignUp ? register() : login();
   }
 
   function login() {
@@ -24,6 +27,8 @@ function Login(props) {
       .then((data) => {
         console.log(data);
         console.log("props", props);
+        localStorage.setItem("accessToken", data.accessToken);
+        setUserName(data.user.fullName);
         props.setLoggedIn(true);
         props.onClose();
       });
@@ -45,7 +50,7 @@ function Login(props) {
       .then((data) => {
         console.log(data);
         console.log("props", props);
-        props.setLoggedIn(true);
+        setIsSignUp(true);
         props.onClose();
       });
   }
@@ -86,7 +91,7 @@ function Login(props) {
               Sign in to our platform
             </h3>
             <form class="space-y-6" action="#" onSubmit={handleSubmit}>
-              {isSignUp && (
+              {!isSignUp && (
                 <div>
                   <label
                     for="fullName"
@@ -167,14 +172,14 @@ function Login(props) {
                 type="submit"
                 class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
-                {isSignUp ? "Register" : "Login to your account"}
+                {!isSignUp ? "Register" : "Login to your account"}
               </button>
               <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
                 Not registered?{" "}
                 <a
                   href="#"
                   class="text-blue-700 hover:underline dark:text-blue-500"
-                  onClick={(e) => setIsSignUp(true)}
+                  onClick={(e) => setIsSignUp(false)}
                 >
                   Create account
                 </a>

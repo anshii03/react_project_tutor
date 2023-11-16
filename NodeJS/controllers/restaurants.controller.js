@@ -3,27 +3,23 @@ const restaurantModel = require("../model/restaurants.model");
 exports.create = (req, res) => {
   const {
     name,
-    city,
-    area,
     avgRating,
-    clodinaryImageId,
+    cloudinaryImageID,
     cuisines,
     costForTwo,
-    costForTwoString,
-    deliveryTime,
+    menuItems,
   } = req.body;
+
+  console.log("cloudinaryImageId", cloudinaryImageID);
 
   // Creating a new row
   const newRestaurant = new restaurantModel({
     name,
-    city,
-    area,
     avgRating,
-    clodinaryImageId,
+    cloudinaryImageID,
     cuisines,
     costForTwo,
-    costForTwoString,
-    deliveryTime,
+    menuItems,
   });
 
   newRestaurant
@@ -43,6 +39,22 @@ exports.create = (req, res) => {
 exports.fetch = (req, res) => {
   restaurantModel
     .find()
+    .then((data) => {
+      if (!data) {
+        res.status(404).json({ message: "Data not found" });
+      }
+
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).json({ message: "server not available" });
+    });
+};
+
+exports.fetchOne = (req, res) => {
+  const _id = req.params.id;
+  restaurantModel
+    .findById({ _id: _id })
     .then((data) => {
       if (!data) {
         res.status(404).json({ message: "Data not found" });

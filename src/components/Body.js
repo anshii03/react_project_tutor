@@ -40,30 +40,30 @@ const Body = () => {
   }
 
   const fetchData = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
-    );
+    const data = await fetch("http://localhost:5000/api/restaurants");
 
     const json = await data.json();
 
     console.log("json", json);
 
-    //Optional Chaining
-    setAllRestaurants(
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
+    setAllRestaurants(json);
 
-    setFilteredRestaurants(
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
+    setFilteredRestaurants(json);
+
+    //Optional Chaining
+    // setAllRestaurants(
+    //   json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    // );
+
+    // setFilteredRestaurants(
+    //   json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    // );
     console.log("all", allRestaurants);
   };
 
   function filterRestaurants() {
     const filterData = allRestaurants.filter((restaurant) => {
-      return restaurant.info.name
-        .toLowerCase()
-        .includes(searchText.toLowerCase());
+      return restaurant.name.toLowerCase().includes(searchText.toLowerCase());
     });
 
     // searchText = "Pizza"
@@ -112,12 +112,9 @@ const Body = () => {
         <div className="res-container">
           {filteredRestaurants.map((restaurant) => {
             return (
-              <Link
-                to={`/restaurant/${restaurant.info.id}`}
-                key={restaurant.info.id}
-              >
+              <Link to={`/restaurant/${restaurant._id}`} key={restaurant._id}>
                 <RestaurantCard
-                  key={restaurant.info.id}
+                  key={restaurant._id}
                   restaurant_details={restaurant}
                 />
               </Link>

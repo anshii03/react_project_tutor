@@ -2,14 +2,11 @@ const mongoose = require("mongoose");
 
 const RestaurantSchema = new mongoose.Schema({
   name: String,
-  city: String,
-  area: String,
   avgRating: String,
-  cloudinaryImageId: String,
+  cloudinaryImageID: String,
   cuisines: Array,
   costForTwo: Number,
-  costForTwoString: String,
-  deliveryTime: Number,
+  menuItems: Array,
 });
 
 const RestaurantModel = mongoose.model("Restaurants", RestaurantSchema);

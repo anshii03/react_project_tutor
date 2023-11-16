@@ -5,14 +5,14 @@ import userContext from "../common/userContext";
 const RestaurantCard = (props) => {
   // Object destructuring
 
-  const { name, cuisines, avgRating, costForTwo, cloudinaryImageId } =
-    props.restaurant_details.info;
+  const { name, cuisines, avgRating, costForTwo, cloudinaryImageID } =
+    props.restaurant_details;
 
   const { currentUser } = useContext(userContext);
 
   return (
     <div className="restaurant-card">
-      <img src={CDN_URL + cloudinaryImageId} alt="restaurant"></img>
+      <img src={CDN_URL + cloudinaryImageID} alt="restaurant"></img>
       <div className="res-card-details">
         <div>
           <h2>{name}</h2>

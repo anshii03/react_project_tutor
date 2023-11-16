@@ -45,12 +45,13 @@ exports.login = (req, res) => {
         res.status(401).send({ message: "Invalid Password" });
       }
 
-      let token = jwt.sign({ id: data._id }, "secretKey");
+      let token = jwt.sign({ id: data._id }, "secretKey", { expiresIn: "1h" });
       res.send({
         user: {
           id: data._id,
           email: data.email,
           password: data.password,
+          fullName: data.fullName,
         },
         accessToken: token,
       });
