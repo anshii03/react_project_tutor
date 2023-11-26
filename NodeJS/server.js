@@ -20,7 +20,7 @@ app.listen("5000", () => {
 });
 
 mongoose.connect(
-  "mongodb+srv://algotutor:mongodb123@cluster0.xe2pgh6.mongodb.net/"
+  "mongodb+srv://geeksforgeeks:geeks123@cluster0.r8udfmn.mongodb.net/"
 );
 
 const db = mongoose.connection;

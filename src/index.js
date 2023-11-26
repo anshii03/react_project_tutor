@@ -10,6 +10,8 @@ import Body from "./components/Body";
 import Profile from "./components/Profile";
 import RestaurantDetails from "./components/RestaurantDetails";
 import Cart from "./components/Cart";
+import { Memo } from "./components/Memo";
+import Ref from "./components/Ref";
 
 /**
  * Lazy Loading
@@ -45,6 +47,14 @@ const appRouter = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/memo",
+        element: <Memo />,
+      },
+      {
+        path: "ref",
+        element: <Ref />,
       },
       {
         path: "/restaurant/:resId", // dynamic routing

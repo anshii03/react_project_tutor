@@ -87,6 +87,7 @@ const Body = () => {
         <div className="search-bar">
           <input
             type="text"
+            data-testid="searchInput"
             className="border border-solid border-black"
             onChange={handleOnChangeEvent}
           ></input>
